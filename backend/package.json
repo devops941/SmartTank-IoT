@@ -1,0 +1,14 @@
+{
+  "name": "smarttank-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "serialport": "^13.0.0"
+  }
+}

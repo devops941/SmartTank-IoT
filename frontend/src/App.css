@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg-color: #fafbfd;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent-blue: #2563eb;
+  --accent-light-blue: #eff6ff;
+  --accent-badge-blue: #dbeafe;
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-container {
+  width: 100%;
+  max-width: 1100px;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.logo-drop {
+  background: var(--accent-badge-blue);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-blue);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.subtitle {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin: 0;
+}
+
+/* Grid Layout */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 600px) {
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border-radius: 28px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.multiline-header {
+  line-height: 1.5;
+}
+
+/* Pump Status Card */
+.status-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.dot-active { background: var(--success); }
+.dot-inactive { background: var(--text-light); box-shadow: none; }
+
+.pump-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pump-ring {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 1.5px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.ring-active {
+  box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.1);
+}
+
+.pump-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightning-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.icon-active { color: var(--success); }
+.icon-inactive { color: var(--text-light); }
+
+.pump-text {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.text-active { color: var(--success); }
+.text-inactive { color: var(--text-light); }
+
+/* Tank Card */
+.level-badge {
+  background: var(--accent-light-blue);
+  color: var(--accent-blue);
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.tank-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.tank-glass {
+  width: 110px;
+  height: 200px;
+  background: #f8fafc;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.tank-markers {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+  margin-right: 20px;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+  position: relative;
+}
+
+.tank-markers::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 5px;
+  bottom: 5px;
+  width: 1px;
+  background: #e2e8f0;
+}
+
+.tank-water {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, #38bdf8, #2563eb);
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #38bdf8; /* For SVG wave fill */
+}
+
+.wave-svg {
+  position: absolute;
+  top: -19px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+}
+
+/* Sensors Card */
+.sensor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.sensor-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background: #f8fafc;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+}
+
+.sensor-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.check-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.check-circle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sensor-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-main);
+}
+
+.premium-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.badge-wet {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.badge-dry {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.error-banner {
+  background: var(--danger-bg);
+  color: var(--danger);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
