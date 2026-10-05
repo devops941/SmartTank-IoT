@@ -331,3 +331,39 @@ body {
   text-align: center;
   font-weight: 600;
 }
+
+.connect-banner {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.connect-btn {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.connect-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.grid-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
