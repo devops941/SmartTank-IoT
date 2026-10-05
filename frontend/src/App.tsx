@@ -13,10 +13,10 @@ function App() {
     topSensor: null,
     pumpOn: null,
   })
-  
+
   const [error, setError] = useState<string | null>(null)
   const [isConnected, setIsConnected] = useState(false)
-  
+
   // Reference to keep track of the serial connection state
   const isReadingRef = useRef(false);
 
@@ -27,10 +27,10 @@ function App() {
       if (!nav.serial) {
         throw new Error("Web Serial API not supported in this browser. Please use Chrome or Edge.");
       }
-      
+
       const port = await nav.serial.requestPort();
       await port.open({ baudRate: 9600 });
-      
+
       setIsConnected(true);
       setError(null);
       isReadingRef.current = true;
@@ -46,11 +46,11 @@ function App() {
       while (isReadingRef.current) {
         const { value, done } = await reader.read();
         if (done) break;
-        
+
         buffer += value;
         // Split data into lines by newline character
         const lines = buffer.split('\n');
-        
+
         // The last element might be an incomplete string, keep it in the buffer
         buffer = lines.pop() || '';
 
@@ -67,7 +67,7 @@ function App() {
           }
         }
       }
-      
+
       reader.releaseLock();
     } catch (err: any) {
       console.error(err);
@@ -79,14 +79,14 @@ function App() {
   const getWaterLevelText = () => {
     if (!isConnected) return "Disconnected";
     if (status.bottomSensor === null) return "Reading...";
-    
+
     const top = Number(status.topSensor);
     const bottom = Number(status.bottomSensor);
 
     if (top === 1) return "100% - Full";
     if (bottom === 1 && top === 0) return "50% - Filling";
     if (bottom === 0 && top === 0) return "0% - Empty";
-    
+
     return "Error";
   }
 
@@ -144,7 +144,7 @@ function App() {
             <h2>PUMP ENGINE</h2>
             <div className={`status-dot ${isPumpActive ? 'dot-active' : 'dot-inactive'}`}></div>
           </div>
-          
+
           <div className="pump-display">
             <div className={`pump-ring ${isPumpActive ? 'ring-active' : ''}`}>
               <div className="pump-center">
@@ -152,7 +152,7 @@ function App() {
                   <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                 </svg>
                 <span className={`pump-text ${isPumpActive ? 'text-active' : 'text-inactive'}`}>
-                  {isPumpActive ? 'RUNNING' : 'STANDBY'}
+                  {isPumpActive ? 'STANDBY' : 'RUNNING'}
                 </span>
               </div>
             </div>
@@ -162,10 +162,10 @@ function App() {
         {/* WATER LEVEL CARD */}
         <div className="card">
           <div className="card-header level-header">
-            <h2 className="multiline-header">TANK<br/>CAPACITY</h2>
+            <h2 className="multiline-header">TANK<br />CAPACITY</h2>
             <span className="level-badge">{getWaterLevelText()}</span>
           </div>
-          
+
           <div className="tank-container">
             <div className="tank-markers">
               <span>100%</span>
@@ -181,7 +181,7 @@ function App() {
             </div>
           </div>
         </div>
-        
+
         {/* SENSOR CARD */}
         <div className="card">
           <div className="card-header">
@@ -193,19 +193,19 @@ function App() {
                 <div className="check-circle">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                <span className="sensor-name">Top<br/>Sensor</span>
+                <span className="sensor-name">Top<br />Sensor</span>
               </div>
               <div className={`premium-badge ${Number(status.topSensor) === 1 ? 'badge-wet' : 'badge-dry'}`}>
                 {getSensorText(status.topSensor)}
               </div>
             </div>
-            
+
             <div className="sensor-item">
               <div className="sensor-info">
                 <div className="check-circle">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                <span className="sensor-name">Bottom<br/>Sensor</span>
+                <span className="sensor-name">Bottom<br />Sensor</span>
               </div>
               <div className={`premium-badge ${Number(status.bottomSensor) === 1 ? 'badge-wet' : 'badge-dry'}`}>
                 {getSensorText(status.bottomSensor)}
